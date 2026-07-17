@@ -1,7 +1,4 @@
 import UserMenu from "@/components/UserMenu";
-import { AccountCreate } from "@/features/accounts/components/AccountCreate";
-import { CategoryCreate } from "@/features/categories/components/CategoryCreate";
-import { SubAccountCreate } from "@/features/subaccounts/components/SubAccountCreate";
 import { requireUser } from "@/lib/require-user";
 
 export default async function Page() {
@@ -12,11 +9,6 @@ export default async function Page() {
         <UserMenu signedEmail={user.email} isSettings={true} />
       </div>
       <h1>Settings Page</h1>
-      <a href="/"><h2>Return</h2></a>
-
-      <AccountCreate />
-      <SubAccountCreate />
-      <CategoryCreate />
     </>
   );
 }
