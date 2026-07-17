@@ -3,6 +3,8 @@ import { AccountsList } from "@/features/accounts/components/AccountsList";
 import { CreateAccount } from "@/features/accounts/components/CreateAccount";
 import { BucketsList } from "@/features/buckets/components/BucketsList";
 import { CreateBucket } from "@/features/buckets/components/CreateBucket";
+import { CategoryList } from "@/features/categories/components/CategoryList";
+import { CreateCategory } from "@/features/categories/components/CreateCategory";
 import { requireUser } from "@/lib/require-user";
 
 export default async function Page() {
@@ -22,6 +24,10 @@ export default async function Page() {
           <div className="flex flex-col">
             <CreateAccount />
             <AccountsList />
+          </div>
+          <div className="flex flex-col">
+            <CreateCategory />
+            <CategoryList />
           </div>
         </div>
       </div>
