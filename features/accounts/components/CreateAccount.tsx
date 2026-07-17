@@ -21,6 +21,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { getBuckets } from "@/features/buckets/queries";
+import { createAccount } from "../actions";
 
 export async function CreateAccount() {
   const buckets = await getBuckets();
@@ -40,7 +41,7 @@ export async function CreateAccount() {
           <DialogDescription>Accounts belong to buckets</DialogDescription>
         </DialogHeader>
 
-        <form>
+        <form action={createAccount} >
           <FieldGroup>
             <Field>
               <Label htmlFor="create-account-name">Name</Label>
