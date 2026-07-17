@@ -1,14 +1,28 @@
 import UserMenu from "@/components/UserMenu";
+import { CreateAccount } from "@/features/accounts/components/CreateAccount";
+import { BucketsList } from "@/features/buckets/components/BucketsList";
+import { CreateBucket } from "@/features/buckets/components/CreateBucket";
 import { requireUser } from "@/lib/require-user";
 
 export default async function Page() {
   const user = await requireUser();
   return (
-    <>
+    <main>
       <div className="fixed right-4 top-4 z-50 sm:right-6 sm:top-6">
         <UserMenu signedEmail={user.email} isSettings={true} />
       </div>
-      <h1>Settings Page</h1>
-    </>
+      <div className="w-fit h-fit m-4">
+        <h1 className="font-semibold text-4xl">Settings</h1>
+        <div className="w-full flex flex-row">
+          <div className="flex flex-col">
+            <CreateBucket />
+            <BucketsList />
+          </div>
+          <div className="flex flex-row">
+            <CreateAccount />
+          </div>
+        </div>
+      </div>
+    </main>
   );
 }

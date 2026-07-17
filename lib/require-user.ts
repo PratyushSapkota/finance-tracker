@@ -11,7 +11,7 @@ export class Unauthorized extends Error {
   }
 }
 
-export async function userExists() {
+async function getUser() {
   const supabase = await createSupabaseServerClient();
   const {
     data: { user },
@@ -22,9 +22,22 @@ export async function userExists() {
 }
 
 export async function requireUser() {
-  const { user, error } = await userExists();
+  const { user, error } = await getUser();
   if (error || !user) {
     redirect("/login");
   }
   return user;
+}
+
+export async function getUserIfExists() {
+  const { user, error, supabase } = await getUser();
+  if (error) {
+    throw error;
+  }
+
+  if (!user) {
+    throw new Unauthorized("");
+  }
+
+  return { user, supabase };
 }
