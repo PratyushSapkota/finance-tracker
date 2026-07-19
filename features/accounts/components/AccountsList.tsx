@@ -22,7 +22,7 @@ export async function AccountsList() {
           }}
           className="p-2"
         >
-          {account.name}
+          {account.name} {account.balance}
         </div>
       ))}
     </div>
