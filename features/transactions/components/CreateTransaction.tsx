@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import { Field, FieldGroup } from "@/components/ui/field";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { getAccounts } from "@/features/accounts/queries";
@@ -15,6 +15,8 @@ import { getCategories } from "@/features/categories/queries";
 import { CategorySelect } from "./CategorySelect";
 import { AccountSelect } from "./AccountSelect";
 import { Button } from "@/components/ui/button";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { createTransaction } from "../actions";
 
 export async function CreateTransaction() {
   const categories = await getCategories();
@@ -22,9 +24,19 @@ export async function CreateTransaction() {
   const buckets = await getBuckets();
 
   return (
-    <div className="border-2 border-red-900 w-fit">
+    <div className="border-2 border-red-900 w-fit p-9">
       <h1>Create Transaction</h1>
-      <form>
+      <form action={createTransaction}>
+        <RadioGroup defaultValue="expense" name="expense-or-income">
+          <Field orientation={"horizontal"}>
+            <RadioGroupItem value="expense" id="expense" />
+            <FieldLabel htmlFor="expense">Expense</FieldLabel>
+          </Field>
+          <Field orientation={"horizontal"}>
+            <RadioGroupItem value="income" id="income" />
+            <FieldLabel htmlFor="income">Income</FieldLabel>
+          </Field>
+        </RadioGroup>
         <Field>
           <Label htmlFor="transaction-description">
             Transaction Description
@@ -52,12 +64,16 @@ export async function CreateTransaction() {
           <Input
             type={"date"}
             defaultValue={new Date().toISOString().split("T")[0]}
+            name="transactionDate"
           />
         </Field>
         <CardFooter>
-          <Button className="bg-orange-700">Create</Button>
+          <Button type="submit" className="bg-orange-700">Create</Button>
         </CardFooter>
       </form>
     </div>
   );
+}
+
+{
 }

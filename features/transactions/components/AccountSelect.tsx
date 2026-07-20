@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/combobox";
 import { Account } from "@/features/accounts/types";
 import { Bucket } from "@/features/buckets/types";
+import { useState } from "react";
 
 type AccountItem = {
   id: string;
@@ -23,6 +24,7 @@ type AccountItem = {
 type AccountGroup = {
   id: string;
   label: string;
+  color: string;
   items: AccountItem[];
 };
 
@@ -36,6 +38,7 @@ export function AccountSelect({
   const items: AccountGroup[] = buckets
     .map((bucket) => ({
       id: bucket.id,
+      color: bucket.color,
       label: bucket.name,
       items: accounts
         .filter((account) => account.bucket_id === bucket.id)
@@ -47,26 +50,37 @@ export function AccountSelect({
     }))
     .filter((bucket) => bucket.items.length > 0);
 
+  const [selected, setSelected] = useState<AccountGroup | null>(null);
+
   return (
-    <Combobox items={items}>
-      <ComboboxInput id="transaction-account" name="transactionAccount" />
-      <ComboboxContent>
-        <ComboboxEmpty>Please create an account from settings.</ComboboxEmpty>
-        <ComboboxList>
-          {(group: AccountGroup) => (
-            <ComboboxGroup key={group.id} items={group.items}>
-              <ComboboxLabel>{group.label}</ComboboxLabel>
-              <ComboboxCollection>
-                {(item: AccountItem) => (
-                  <ComboboxItem key={item.id} value={item}>
-                    {item.label}
-                  </ComboboxItem>
-                )}
-              </ComboboxCollection>
-            </ComboboxGroup>
-          )}
-        </ComboboxList>
-      </ComboboxContent>
-    </Combobox>
+    <>
+      <input
+        type="hidden"
+        value={selected?.id ?? ""}
+        name="transactionAccount"
+      />
+      <Combobox items={items} value={selected} onValueChange={setSelected}>
+        <ComboboxInput id="transaction-account" />
+        <ComboboxContent>
+          <ComboboxEmpty>Please create an account from settings.</ComboboxEmpty>
+          <ComboboxList>
+            {(group: AccountGroup) => (
+              <ComboboxGroup key={group.id} items={group.items}>
+                <ComboboxLabel style={{ color: group.color }}>
+                  {group.label}
+                </ComboboxLabel>
+                <ComboboxCollection>
+                  {(item: AccountItem) => (
+                    <ComboboxItem key={item.id} value={item}>
+                      {item.label}
+                    </ComboboxItem>
+                  )}
+                </ComboboxCollection>
+              </ComboboxGroup>
+            )}
+          </ComboboxList>
+        </ComboboxContent>
+      </Combobox>
+    </>
   );
 }
