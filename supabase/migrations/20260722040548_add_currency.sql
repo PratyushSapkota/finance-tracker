@@ -1,0 +1,1 @@
+alter table public.buckets add column currency text not null default '$';

@@ -1,15 +1,17 @@
 import { getBuckets } from "@/features/buckets/queries";
 import { getAccounts } from "../queries";
 import { getTextColor } from "@/utils/text-color";
+import { Bucket } from "@/features/buckets/types";
 
 export async function AccountsList() {
   const accounts = await getAccounts();
   const buckets = await getBuckets();
 
-  let bucketToColor: Record<string, string> = {};
+  let bucketData: Record<string, Bucket> = {};
   buckets.map((bucket) => {
-    bucketToColor[bucket.id] = bucket.color;
-  });
+    bucketData[bucket.id] = bucket;
+  })
+
 
   return (
     <div className="">
@@ -17,12 +19,17 @@ export async function AccountsList() {
         <div
           key={account.id}
           style={{
-            background: bucketToColor[account.bucket_id],
-            color: getTextColor(bucketToColor[account.bucket_id]),
+            background: bucketData[account.bucket_id].color,
+            color: getTextColor(bucketData[account.bucket_id].color),
           }}
           className="p-2"
         >
-          {account.name} {account.balance}
+          <div>
+            {account.name}
+          </div>
+          <div>
+            {bucketData[account.bucket_id].currency}{account.balance}
+          </div>
         </div>
       ))}
     </div>

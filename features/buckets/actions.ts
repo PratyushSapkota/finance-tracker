@@ -7,6 +7,7 @@ export async function createBucket(formData: FormData) {
 
   const name = formData.get("createBucketName") as string;
   const color = formData.get("createBucketColor") as string;
+  const currency = formData.get("createBucketCurrency") as string;
 
   const {error: insertError} = await supabase.from("buckets").insert({
     user_id: user.id,

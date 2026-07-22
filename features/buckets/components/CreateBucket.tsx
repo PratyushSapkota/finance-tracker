@@ -43,6 +43,15 @@ export function CreateBucket() {
                 name="createBucketColor"
               />
             </Field>
+            <Field>
+              <Label htmlFor="create-bucket-currency">Currency Label</Label>
+              <Input
+                id="create-bucket-currency"
+                type="text"
+                name="createBucketCurrency"
+                // defaultValue={"$"}
+              />
+            </Field>
           </FieldGroup>
 
           <DialogFooter>

@@ -1,5 +1,6 @@
 export type Bucket = {
     name: string,
     color: string,
-    id: string
+    id: string,
+    currency: string
 }
