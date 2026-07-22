@@ -1,0 +1,1 @@
+alter table public.transactions add column transaction_description text null;
