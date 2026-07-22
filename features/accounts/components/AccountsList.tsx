@@ -2,6 +2,7 @@ import { getBuckets } from "@/features/buckets/queries";
 import { getAccounts } from "../queries";
 import { getTextColor } from "@/utils/text-color";
 import { Bucket } from "@/features/buckets/types";
+import { formatAmount } from "@/utils/amount";
 
 export async function AccountsList() {
   const accounts = await getAccounts();
@@ -28,7 +29,7 @@ export async function AccountsList() {
             {account.name}
           </div>
           <div>
-            {bucketData[account.bucket_id].currency}{account.balance}
+            {formatAmount(account.balance, bucketData[account.bucket_id].currency)}
           </div>
         </div>
       ))}

@@ -3,6 +3,7 @@ import UserMenu from "@/components/UserMenu";
 import { requireUser } from "@/lib/require-user";
 import { CreateTransaction } from "@/features/transactions/components/CreateTransaction";
 import { AccountsList } from "@/features/accounts/components/AccountsList";
+import { TransactionList } from "@/features/transactions/components/TransactionList";
 
 async function Page() {
   const user = await requireUser();
@@ -14,7 +15,7 @@ async function Page() {
       </div>
       <div className="w-full h-full flex">
         <AccountsList />
-        <div>Transaction List</div>
+        <TransactionList />
         <div>
           Transfer
         <CreateTransaction />
