@@ -1,8 +1,8 @@
 import { TableCell, TableRow } from "@/components/ui/table";
 import { DetailedTransaction } from "../types";
-import { formatAmount } from "@/utils/amount";
 import { Badge } from "@/components/ui/badge";
 import { getTextColor } from "@/utils/text-color";
+import { FormattedAmount } from "@/components/ui/amount";
 
 export function TransactionRow({
   transaction,
@@ -14,10 +14,10 @@ export function TransactionRow({
       <TableCell>{transaction.date}</TableCell>
       <TableCell>{transaction.description}</TableCell>
       <TableCell>
-        {formatAmount(
-          transaction.amount,
-          transaction.accountWithBucket.buckets.currency,
-        )}
+        <FormattedAmount
+          amount={transaction.amount}
+          currency={transaction.accountWithBucket.buckets.currency}
+        />
       </TableCell>
       <TableCell>
         <ColoredBadge

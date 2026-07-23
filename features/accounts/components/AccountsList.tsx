@@ -2,7 +2,7 @@ import { getBuckets } from "@/features/buckets/queries";
 import { getAccounts } from "../queries";
 import { getTextColor } from "@/utils/text-color";
 import { Bucket } from "@/features/buckets/types";
-import { formatAmount } from "@/utils/amount";
+import { FormattedAmount } from "@/components/ui/amount";
 
 export async function AccountsList() {
   const accounts = await getAccounts();
@@ -11,8 +11,7 @@ export async function AccountsList() {
   let bucketData: Record<string, Bucket> = {};
   buckets.map((bucket) => {
     bucketData[bucket.id] = bucket;
-  })
-
+  });
 
   return (
     <div className="">
@@ -25,11 +24,13 @@ export async function AccountsList() {
           }}
           className="p-2"
         >
+          <div>{account.name}</div>
           <div>
-            {account.name}
-          </div>
-          <div>
-            {formatAmount(account.balance, bucketData[account.bucket_id].currency)}
+            <FormattedAmount
+              amount={account.balance}
+              currency={bucketData[account.bucket_id].currency}
+              colored={false}
+            />
           </div>
         </div>
       ))}
