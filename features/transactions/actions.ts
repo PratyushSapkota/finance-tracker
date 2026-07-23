@@ -1,6 +1,7 @@
 "use server";
 
 import { getUserIfExists } from "@/lib/require-user";
+import { revalidatePath } from "next/cache";
 
 function parseFormData(formData: FormData) {
   const expense_or_income = formData.get("expense-or-income") as string;
@@ -36,4 +37,6 @@ export async function createTransaction(formData: FormData) {
   if (rpcError) {
     throw rpcError;
   }
+
+  revalidatePath("/");
 }

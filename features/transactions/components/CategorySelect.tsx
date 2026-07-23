@@ -35,6 +35,7 @@ export function CategorySelect({ categories }: { categories: Category[] }) {
           <ComboboxList>
             {(item) => (
               <ComboboxItem
+              className="mb-0.5"
                 style={{
                   background: item.color,
                   color: getTextColor(item.color),

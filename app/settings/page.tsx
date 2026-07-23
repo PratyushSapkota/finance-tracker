@@ -16,6 +16,7 @@ export default async function Page() {
       </div>
       <div className="w-fit h-fit m-4 flex flex-col gap-5">
         <h1 className="font-semibold text-4xl">Settings</h1>
+        <a href="/" className="text-blue-600">Return</a>
         <div className="w-full flex flex-row gap-5">
           <div className="flex flex-col">
             <CreateBucket />

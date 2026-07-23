@@ -10,5 +10,5 @@ export type Account = {
 
 
 export type AccountWithBucket = Account & {
-  bucket: Bucket;
+  buckets: Bucket;
 };

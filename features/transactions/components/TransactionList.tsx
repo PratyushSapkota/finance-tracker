@@ -11,14 +11,14 @@ import { TransactionRow } from "./TransactionRow";
 export async function TransactionList() {
   const transactions = await getTransactions();
   return (
-    <Table className="">
+    <Table className="w-fit">
       <TableHeader>
         <TableRow>
-          <TableHead className="whitespace-nowrap">Date</TableHead>
-          <TableHead className="whitespace-nowrap">Description</TableHead>
-          <TableHead className="whitespace-nowrap">Amount</TableHead>
-          <TableHead className="whitespace-nowrap">Account</TableHead>
-          <TableHead className="whitespace-nowrap">Category</TableHead>
+          <TableHead>Date</TableHead>
+          <TableHead>Description</TableHead>
+          <TableHead>Amount</TableHead>
+          <TableHead>Account</TableHead>
+          <TableHead>Category</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
