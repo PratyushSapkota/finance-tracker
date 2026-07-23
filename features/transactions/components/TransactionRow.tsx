@@ -3,6 +3,7 @@ import { DetailedTransaction } from "../types";
 import { Badge } from "@/components/ui/badge";
 import { getTextColor } from "@/utils/text-color";
 import { FormattedAmount } from "@/components/ui/amount";
+import { FormattedDate } from "@/components/ui/date";
 
 export function TransactionRow({
   transaction,
@@ -11,7 +12,9 @@ export function TransactionRow({
 }) {
   return (
     <TableRow>
-      <TableCell>{transaction.date}</TableCell>
+      <TableCell>
+        <FormattedDate date={transaction.date} />
+      </TableCell>
       <TableCell>{transaction.description}</TableCell>
       <TableCell>
         <FormattedAmount
